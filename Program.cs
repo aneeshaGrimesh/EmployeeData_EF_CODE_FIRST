@@ -1,7 +1,16 @@
+using EmployeeData.DAL;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//DI FOR CONNECTION TO SQL SERVER 
+builder.Services.AddDbContext<EmployeeDBContext>(Options =>
+Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
 
 var app = builder.Build();
 

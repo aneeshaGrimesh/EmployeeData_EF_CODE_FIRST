@@ -1,0 +1,69 @@
+﻿@*Taken the employee list*@
+
+@model List<EmployeeData.Models.EmployeeViewModel>
+
+@*heading given*@
+
+    @{
+        ViewData["Title"] = "Employee Details";
+    }
+    <h3>@ViewData["Title"]</h3>
+
+@*horizondental row for separation*@
+
+    <hr/>
+
+    <form>
+        <button asp-action="Create" asp-controller="Employee" class="btn btn-primary">
+            Create Employee
+        </button>
+        <table class="table table-responsive table-hover">
+            <thead>
+                <tr class="table-active">
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Date Of Birth</th>
+                    <th>Email</th>
+                    <th>Salary</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                        @foreach (var employee in Model)
+                        {
+                            <tr>
+                                <td>@employee.Id</td>
+                                <td>@employee.FullName</td>
+                                <td>@employee.DateofBirth</td>
+                                <td>@employee.Email</td>
+                                <td>@employee.Salary</td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <a asp-controller="Employee" asp-action="Edit" asp-route-id="@employee.Id" class="btn btn-primary">Edit</a>
+                                        <a asp-controller="Employee" asp-action="Edit" asp-route-id="@employee.Id" class="btn btn-danger">Delete</a>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6">
+                            <div>
+                                No Employees Avilable
+                            </div>
+
+                        </td>
+                    </tr>
+                
+                }
+
+            </tbody>
+
+        </table>
+    </form>
