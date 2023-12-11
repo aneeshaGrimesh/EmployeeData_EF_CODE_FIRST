@@ -4,20 +4,39 @@
 
 @*heading given*@
 
-    @{
-        ViewData["Title"] = "Employee Details";
-    }
-    <h3>@ViewData["Title"]</h3>
+@{
+    ViewData["Title"] = "Employee Details";
+    var successmessage = TempData["SuccessMessage"]?.ToString();  /*checking msg is ther if it is Convert to string*/
+    var errormessage = TempData["errorMessage"]?.ToString();
+}
+
+<h3>@ViewData["Title"]</h3>
 
 @*horizondental row for separation*@
+<hr/>
 
-    <hr/>
+@*errormessage assiging*@
+@if(!string.IsNullOrWhiteSpace(successmessage))
+{
+    <div class="alert alert-success">
+        <strong>Success!</strong>@successmessage
+    </div>
+    <button type="button"  class="btn-close float-end" data-bs-dismiss="alert"></button>
+}
+else  if(!string.IsNullOrWhiteSpace(errormessage))
+{
+    <div class="alert alert-danger">
+        <strong>Failed!</strong>@errormessage
+             <button type="button"  class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+   
+}
 
     <form>
-        <button asp-action="Create" asp-controller="Employee" class="btn btn-primary">
+        <button asp-action="Create" asp-controller="Employee" class="btn btn-primary mb-3" >
             Create Employee
         </button>
-        <table class="table table-responsive table-hover">
+        <table class="table table-responsive table-hover table-bordered">
             <thead>
                 <tr class="table-active">
                     <th>Id</th>
@@ -37,7 +56,7 @@
                             <tr>
                                 <td>@employee.Id</td>
                                 <td>@employee.FullName</td>
-                                <td>@employee.DateofBirth</td>
+                                <td>@employee.DateofBirth.ToString("dd/MM/yyyy")</td>  @*date time formated here*@
                                 <td>@employee.Email</td>
                                 <td>@employee.Salary</td>
                                 <td>
