@@ -20,14 +20,15 @@
 {
     <div class="alert alert-success">
         <strong>Success!</strong>@successmessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+
     </div>
-    <button type="button"  class="btn-close float-end" data-bs-dismiss="alert"></button>
 }
 else  if(!string.IsNullOrWhiteSpace(errormessage))
 {
     <div class="alert alert-danger">
         <strong>Failed!</strong>@errormessage
-             <button type="button"  class="btn-close float-end" data-bs-dismiss="alert"></button>
+         <button type="button"  class="btn-close float-end" data-bs-dismiss="alert"></button>
     </div>
    
 }
@@ -39,12 +40,12 @@ else  if(!string.IsNullOrWhiteSpace(errormessage))
         <table class="table table-responsive table-hover table-bordered">
             <thead>
                 <tr class="table-active">
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Date Of Birth</th>
-                    <th>Email</th>
-                    <th>Salary</th>
-                    <th>Action</th>
+                <th class="text-center">Id</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Date Of Birth</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Salary</th>
+                <th class="text-center">Action</th>
                 </tr>
             </thead>
 
@@ -54,15 +55,15 @@ else  if(!string.IsNullOrWhiteSpace(errormessage))
                         @foreach (var employee in Model)
                         {
                             <tr>
-                                <td>@employee.Id</td>
+                                <td class="text-center">@employee.Id</td>
                                 <td>@employee.FullName</td>
-                                <td>@employee.DateofBirth.ToString("dd/MM/yyyy")</td>  @*date time formated here*@
+                                <td class="text-center">@employee.DateofBirth.ToString("dd/MM/yyyy")</td>  @*date time formated here*@
                                 <td>@employee.Email</td>
-                                <td>@employee.Salary</td>
-                                <td>
+                                <td class="text-end">@employee.Salary</td>
+                                <td class="text-center">
                                     <div class="btn-group btn-group-sm">
                                         <a asp-controller="Employee" asp-action="Edit" asp-route-id="@employee.Id" class="btn btn-primary">Edit</a>
-                                        <a asp-controller="Employee" asp-action="Edit" asp-route-id="@employee.Id" class="btn btn-danger">Delete</a>
+                                        <a asp-controller="Employee" asp-action="Delete" asp-route-id="@employee.Id" class="btn btn-danger">Delete</a>
 
                                     </div>
                                 </td>
